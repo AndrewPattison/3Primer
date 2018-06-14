@@ -8,11 +8,6 @@ from nesoni import annotation, io, span_index
 from subprocess import call 
 
 
-# This function uses Paul Harrison's annotation class to find regions to give them to primer3
-# Regions are from input genes
-# They are written alongside parameters set in the primer3 config file 
-
-
 # Parse command line arguments
 parser = argparse.ArgumentParser(description='This program is designed to generate and validate primers from a list of genomic regions (gff file) in for mPAT using nesoni, primer3 and BLAST. It will return primers that have the least hits to the reference genome in their last 15 bases. A hit is defined as a perfectly matching sequence > 10 bases in length.')
 
@@ -40,7 +35,8 @@ parser.add_argument('--generate_blast_db', action = 'store_true',
 args = parser.parse_args()
 
 
-# Grab the sequences from the fasta database and move them upstream as required. 
+# This function uses Paul Harrison's annotation class to find regions to give them to primer3
+# Grab the sequences from the fasta database and move them upstream as required 
 def make_file_for_primer_3 (gff_file, ref_file, names_file, output_file, start, end):
     # check for a tmp direcory 
     if len(glob.glob("./tmp")) == 0:
